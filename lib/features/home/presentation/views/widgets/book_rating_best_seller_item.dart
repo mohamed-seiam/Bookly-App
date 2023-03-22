@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../../style.dart';
+import '../../../../../core/utils/style.dart';
 
 class BookRatingItem extends StatelessWidget {
   const BookRatingItem({Key? key}) : super(key: key);
