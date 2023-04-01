@@ -22,7 +22,7 @@ class BookModel {
   String? id;
   String? etag;
   String? selfLink;
-  VolumeInfo? volumeInfo;
+ late VolumeInfo volumeInfo;
   SaleInfo? saleInfo;
   AccessInfo? accessInfo;
   SearchInfo? searchInfo;
@@ -32,9 +32,7 @@ class BookModel {
     id = json['id'];
     etag = json['etag'];
     selfLink = json['selfLink'];
-    volumeInfo = json['volumeInfo'] != null
-        ? VolumeInfo.fromJson(json['volumeInfo'])
-        : null;
+    volumeInfo =  VolumeInfo.fromJson(json['volumeInfo']);
     saleInfo =
         json['saleInfo'] != null ? SaleInfo.fromJson(json['saleInfo']) : null;
     accessInfo = json['accessInfo'] != null
@@ -63,7 +61,7 @@ class VolumeInfo {
   bool? allowAnonLogging;
   String? contentVersion;
   PanelizationSummary? panelizationSummary;
-  ImageLinks? imageLinks;
+ late ImageLinks imageLinks;
   String? language;
   String? previewLink;
   String? infoLink;
@@ -96,9 +94,7 @@ class VolumeInfo {
     panelizationSummary = json['panelizationSummary'] != null
         ? PanelizationSummary.fromJson(json['panelizationSummary'])
         : null;
-    imageLinks = json['imageLinks'] != null
-        ? ImageLinks.fromJson(json['imageLinks'])
-        : null;
+    imageLinks = ImageLinks.fromJson(json['imageLinks']);
     language = json['language'];
     previewLink = json['previewLink'];
     infoLink = json['infoLink'];
@@ -138,8 +134,8 @@ class PanelizationSummary {
 }
 
 class ImageLinks {
-  String? smallThumbnail;
-  String? thumbnail;
+ late String smallThumbnail;
+  late String thumbnail;
 
   ImageLinks.fromJson(Map<String, dynamic> json) {
     smallThumbnail = json['smallThumbnail'];
