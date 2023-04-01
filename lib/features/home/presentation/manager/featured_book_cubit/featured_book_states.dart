@@ -7,7 +7,7 @@ class FeaturedBooksInitialState extends FeaturedBooksStates {}
 class FeaturedBooksLoadingState extends FeaturedBooksStates {}
 
 class FeaturedBooksSuccessState extends FeaturedBooksStates {
-  final List<BookModel> books ;
+  final List<BookModel>? books ;
 
   FeaturedBooksSuccessState(this.books);
 

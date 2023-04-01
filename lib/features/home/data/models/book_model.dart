@@ -1,23 +1,23 @@
-class BookModel {
+class BooksResponseModel {
   String? kind;
   int? totalItems;
-  List<Items>? items;
+  List<BookModel>? books;
 
-  BookModel({this.kind, this.totalItems, this.items});
+  BooksResponseModel({this.kind, this.totalItems, this.books});
 
-  BookModel.fromJson(Map<String, dynamic> json) {
+  BooksResponseModel.fromJson(Map<String, dynamic> json) {
     kind = json['kind'];
     totalItems = json['totalItems'];
     if (json['items'] != null) {
-      items = <Items>[];
+      books = <BookModel>[];
       json['items'].forEach((v) {
-        items!.add(Items.fromJson(v));
+        books!.add(BookModel.fromJson(v));
       });
     }
   }
 }
 
-class Items {
+class BookModel {
   String? kind;
   String? id;
   String? etag;
@@ -27,7 +27,7 @@ class Items {
   AccessInfo? accessInfo;
   SearchInfo? searchInfo;
 
-  Items.fromJson(Map<String, dynamic> json) {
+  BookModel.fromJson(Map<String, dynamic> json) {
     kind = json['kind'];
     id = json['id'];
     etag = json['etag'];
@@ -72,7 +72,7 @@ class VolumeInfo {
 
   VolumeInfo.fromJson(Map<String, dynamic> json) {
     title = json['title'];
-    authors = json['authors'].cast<String>();
+    authors = (json['authors'] as List<dynamic>?)?.cast<String>();
     publisher = json['publisher'];
     publishedDate = json['publishedDate'];
     description = json['description'];
@@ -87,7 +87,7 @@ class VolumeInfo {
         : null;
     pageCount = json['pageCount'];
     printType = json['printType'];
-    categories = json['categories'].cast<String>();
+    categories = (json['categories']as List<dynamic>?)?.cast<String>();
     averageRating = json['averageRating'];
     ratingsCount = json['ratingsCount'];
     maturityRating = json['maturityRating'];

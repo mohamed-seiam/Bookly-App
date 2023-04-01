@@ -15,8 +15,8 @@ class NewestBooksCubit extends Cubit<NewestBooksStates>{
 
     result.fold((failure) {
       emit(FailureNewestBooks(failure.errorMessage));
-    }, (books) {
-      emit(SuccessNewestBooks(books));
+    }, (bookResponse) {
+      emit(SuccessNewestBooks(bookResponse.books));
     });
   }
 }

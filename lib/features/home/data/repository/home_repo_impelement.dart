@@ -6,46 +6,46 @@ import 'package:dio/dio.dart';
 
 import '../../../../core/utils/api_service.dart';
 
+
 class HomeRepoImplement implements HomeRepo {
   final ApiService apiService;
 
   HomeRepoImplement(this.apiService);
 
   @override
-  Future<Either<Failure, List<BookModel>>> fetchNewsetdBooks() async {
+  Future<Either<Failure, BooksResponseModel>> fetchNewsetdBooks() async {
     try {
       var data = await apiService.get(
           endPoint:
               'volumes?Filtering=free-ebooks&q=subject:Programming&Sorting=newest');
-
-      List<BookModel> books = [];
-      books.add(BookModel.fromJson(data));
-      return right(books);
+      return right(BooksResponseModel.fromJson(data));
     } catch (error) {
       if (error is DioError)
         {
+          print(error.toString());
           return left(ServiceFailure.fromDioError(error));
         }
 
+      print(error.toString());
       return Left(ServiceFailure(error.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, List<BookModel>>> fetchFeaturedBooks() async {
+  Future<Either<Failure,BooksResponseModel>> fetchFeaturedBooks() async {
     try {
       var data = await apiService.get(
           endPoint:
           'volumes?Filtering=free-ebooks&q=subject:Programming');
-
-      List<BookModel> books = [];
-      books.add(BookModel.fromJson(data));
-      return right(books);
+      return right(BooksResponseModel.fromJson(data));
     } catch (error) {
       if (error is DioError)
       {
+        print(error.toString());
         return left(ServiceFailure.fromDioError(error));
       }
+
+      print(error.toString());
 
       return Left(ServiceFailure(error.toString()));
     }
