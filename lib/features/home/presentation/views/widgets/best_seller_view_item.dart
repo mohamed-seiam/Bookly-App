@@ -1,85 +1,70 @@
 import 'package:bookly_app/core/utils/app_router.dart';
+import 'package:bookly_app/features/home/presentation/views/widgets/custom_book_item.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../constance.dart';
-import '../../../../../core/utils/assets.dart';
 import '../../../../../core/utils/style.dart';
+import '../../../data/models/book_model.dart';
 import 'book_rating_best_seller_item.dart';
 
 class BookListViewItem extends StatelessWidget {
-  const BookListViewItem({Key? key}) : super(key: key);
-
+  const BookListViewItem({Key? key, required this.bookModel}) : super(key: key);
+final BookModel bookModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
         GoRouter.of(context).push(AppRouter.kBookDetailsView);
       },
-      child: Padding(
-        padding: const EdgeInsets.only(left: 30),
-        child: SizedBox(
-          height: 140,
-          child: Row(
-            children: [
-              AspectRatio(
-                aspectRatio: 3 / 4,
-                child: Container(
-                  // width: MediaQuery.of(context).size.width*0.5,
-                  // height: MediaQuery.of(context).size.height*0.4,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    // color: Colors.red,
-                    image: const DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(
-                        AssetsData.testImage,
+      child: SizedBox(
+        height: 125,
+        child: Row(
+          children: [
+           CustomBookImage(image:bookModel.volumeInfo.imageLinks?.thumbnail ?? '' ),
+            const SizedBox(width: 30,),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.5,
+                    child: Text(
+                      bookModel.volumeInfo.title!,
+                      style: Styles.style20.copyWith(
+                        fontFamily: kGtSectraFine,
                       ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                ),
-              ),
-              const SizedBox(width: 30,),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width * 0.5,
-                      child: Text(
-                        'Harry Potter and the Goblet of Fire',
+                  const SizedBox(height: 3,),
+                   Text(
+                    bookModel.volumeInfo.authors![0],
+                    style: Styles.style14,
+                  ),
+                  const SizedBox(height: 3,),
+                  Row(
+                    children: [
+                      Text(
+                        'Free',
                         style: Styles.style20.copyWith(
-                          fontFamily: kGtSectraFine,
+                          fontWeight: FontWeight.bold,
                         ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    const SizedBox(height: 3,),
-                    const Text(
-                      'J.K. RowLing',
-                      style: Styles.style14,
-                    ),
-                    const SizedBox(height: 3,),
-                    Row(
-                      children: [
-                        Text(
-                          '19.99 \$',
-                          style: Styles.style20.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                       const Spacer(),
-                       const BookRatingItem(),
-                      ],
-                    ),
-                  ],
-                ),
+                     const Spacer(),
+                      BookRatingItem(
+                      rating: bookModel.volumeInfo.averageRating??0,
+                      count: bookModel.volumeInfo.ratingsCount??0,
+                     ),
+                    ],
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

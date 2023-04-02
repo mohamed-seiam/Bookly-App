@@ -61,7 +61,7 @@ class VolumeInfo {
   bool? allowAnonLogging;
   String? contentVersion;
   PanelizationSummary? panelizationSummary;
- late ImageLinks imageLinks;
+  ImageLinks? imageLinks;
   String? language;
   String? previewLink;
   String? infoLink;
@@ -94,7 +94,9 @@ class VolumeInfo {
     panelizationSummary = json['panelizationSummary'] != null
         ? PanelizationSummary.fromJson(json['panelizationSummary'])
         : null;
-    imageLinks = ImageLinks.fromJson(json['imageLinks']);
+    imageLinks = json['imageLinks'] != null
+        ? ImageLinks.fromJson(json['imageLinks'])
+        : null;
     language = json['language'];
     previewLink = json['previewLink'];
     infoLink = json['infoLink'];
@@ -134,8 +136,8 @@ class PanelizationSummary {
 }
 
 class ImageLinks {
- late String smallThumbnail;
-  late String thumbnail;
+  String? smallThumbnail;
+  String? thumbnail;
 
   ImageLinks.fromJson(Map<String, dynamic> json) {
     smallThumbnail = json['smallThumbnail'];
