@@ -9,28 +9,32 @@ import 'book_rating_best_seller_item.dart';
 
 class BookListViewItem extends StatelessWidget {
   const BookListViewItem({Key? key, required this.bookModel}) : super(key: key);
-final BookModel bookModel;
+  final BookModel bookModel;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        GoRouter.of(context).push(AppRouter.kBookDetailsView);
+      onTap: () {
+        GoRouter.of(context).push(
+          AppRouter.kBookDetailsView,
+          extra: bookModel,
+        );
       },
       child: SizedBox(
         height: 135,
         child: Row(
           children: [
-           CustomBookImage(image:bookModel.volumeInfo.imageLinks?.thumbnail ?? '' ),
-            const SizedBox(width: 30,),
+            CustomBookImage(
+                image: bookModel.volumeInfo.imageLinks?.thumbnail ?? ''),
+            const SizedBox(
+              width: 30,
+            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width * 0.5,
+                    width: MediaQuery.of(context).size.width * 0.5,
                     child: Text(
                       bookModel.volumeInfo.title!,
                       style: Styles.style20.copyWith(
@@ -40,12 +44,16 @@ final BookModel bookModel;
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  const SizedBox(height: 3,),
-                   Text(
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Text(
                     bookModel.volumeInfo.authors![0],
                     style: Styles.style14,
                   ),
-                  const SizedBox(height: 3,),
+                  const SizedBox(
+                    height: 3,
+                  ),
                   Row(
                     children: [
                       Text(
@@ -54,11 +62,12 @@ final BookModel bookModel;
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                     const Spacer(),
+                      const Spacer(),
                       BookRatingItem(
-                      rating: bookModel.volumeInfo.averageRating?.round()??0,
-                      count: bookModel.volumeInfo.ratingsCount??0,
-                     ),
+                        rating:
+                            bookModel.volumeInfo.averageRating?.round() ?? 0,
+                        count: bookModel.volumeInfo.ratingsCount ?? 0,
+                      ),
                     ],
                   ),
                 ],
@@ -70,7 +79,3 @@ final BookModel bookModel;
     );
   }
 }
-
-
-
-
