@@ -25,6 +25,10 @@ class ServiceFailure extends Failure {
       case DioErrorType.cancel:
         return ServiceFailure('Request to Server was Cancelled');
       case DioErrorType.connectionError:
+        if(dioError.message!.contains('SocketException')){
+
+          return ServiceFailure('No internet connection');
+        }
         return ServiceFailure('Please makeSure that you are connected');
       case DioErrorType.unknown:
         if (dioError.message!.contains('SocketException')) {

@@ -17,7 +17,7 @@ final BookModel bookModel;
         GoRouter.of(context).push(AppRouter.kBookDetailsView);
       },
       child: SizedBox(
-        height: 125,
+        height: 135,
         child: Row(
           children: [
            CustomBookImage(image:bookModel.volumeInfo.imageLinks?.thumbnail ?? '' ),
@@ -56,7 +56,7 @@ final BookModel bookModel;
                       ),
                      const Spacer(),
                       BookRatingItem(
-                      rating: bookModel.volumeInfo.averageRating??0,
+                      rating: bookModel.volumeInfo.averageRating?.round()??0,
                       count: bookModel.volumeInfo.ratingsCount??0,
                      ),
                     ],

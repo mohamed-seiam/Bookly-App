@@ -55,7 +55,7 @@ class VolumeInfo {
   int? pageCount;
   String? printType;
   List<String>? categories;
-  int? averageRating;
+  num? averageRating;
   int? ratingsCount;
   String? maturityRating;
   bool? allowAnonLogging;
