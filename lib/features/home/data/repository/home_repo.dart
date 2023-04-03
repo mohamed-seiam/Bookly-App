@@ -5,4 +5,5 @@ import 'package:dartz/dartz.dart';
 abstract class HomeRepo{
   Future<Either<Failure,BooksResponseModel>> fetchFeaturedBooks();
   Future<Either<Failure,BooksResponseModel>> fetchNewsetdBooks();
+  Future<Either<Failure,BooksResponseModel>> fetchSimilarBooks({required String category});
 }
