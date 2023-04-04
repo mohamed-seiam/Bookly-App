@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/utils/style.dart';
 
 class SimilarBooksSection extends StatelessWidget {
-  const SimilarBooksSection({Key? key}) : super(key: key);
-
+  const SimilarBooksSection({Key? key,}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(

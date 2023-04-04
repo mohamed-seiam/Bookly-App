@@ -7,8 +7,8 @@ import '../../../../../core/utils/style.dart';
 import '../../../data/models/book_model.dart';
 import 'book_rating_best_seller_item.dart';
 
-class BookListViewItem extends StatelessWidget {
-  const BookListViewItem({Key? key, required this.bookModel}) : super(key: key);
+class NewestBookListViewItem extends StatelessWidget {
+  const NewestBookListViewItem({Key? key, required this.bookModel}) : super(key: key);
   final BookModel bookModel;
 
   @override

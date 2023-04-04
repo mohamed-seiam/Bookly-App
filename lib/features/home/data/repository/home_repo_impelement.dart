@@ -56,7 +56,7 @@ class HomeRepoImplement implements HomeRepo {
     try {
       var data = await apiService.get(
           endPoint:
-          'volumes?Filtering=free-ebooks&Sorting=relevance&q=subject:Programming');
+          'volumes?Filtering=free-ebooks&Sorting=relevance &q=subject:Programming');
       return right(BooksResponseModel.fromJson(data));
     } catch (error) {
       if (error is DioError)

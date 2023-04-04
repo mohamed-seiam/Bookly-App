@@ -1,3 +1,4 @@
+import 'package:bookly_app/bloc_observable.dart';
 import 'package:bookly_app/core/utils/app_router.dart';
 import 'package:bookly_app/core/utils/service_locator.dart';
 import 'package:bookly_app/features/home/data/repository/home_repo_impelement.dart';
@@ -11,6 +12,7 @@ import 'constance.dart';
 
 void main() {
   setUp();
+  MyBlocObserver();
   runApp(const BooklyApp());
 }
 
