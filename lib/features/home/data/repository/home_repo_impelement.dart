@@ -56,7 +56,25 @@ class HomeRepoImplement implements HomeRepo {
     try {
       var data = await apiService.get(
           endPoint:
-          'volumes?Filtering=free-ebooks&Sorting=relevance &q=subject:Programming');
+          'volumes?Filtering=free-ebooks&Sorting=relevance &q=subject:$category');
+      return right(BooksResponseModel.fromJson(data));
+    } catch (error) {
+      if (error is DioError)
+      {
+        print(error.toString());
+        return left(ServiceFailure.fromDioError(error));
+      }
+
+      print(error.toString());
+
+      return Left(ServiceFailure(error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, BooksResponseModel>> fetchSearchDataBooks({required String searchKey}) async {
+    try {
+      var data = await apiService.geSearchData(searchKey: searchKey);
       return right(BooksResponseModel.fromJson(data));
     } catch (error) {
       if (error is DioError)

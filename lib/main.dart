@@ -12,7 +12,7 @@ import 'constance.dart';
 
 void main() {
   setUp();
-  MyBlocObserver();
+  Bloc.observer = MyBlocObserver();
   runApp(const BooklyApp());
 }
 
@@ -31,7 +31,7 @@ class BooklyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => NewestBooksCubit(
             getIt.get<HomeRepoImplement>(),
-          )..fetchNewestBooks(),
+          ),
         ),
       ],
       child: MaterialApp.router(

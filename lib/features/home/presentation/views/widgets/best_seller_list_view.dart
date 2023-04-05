@@ -7,12 +7,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/widget/custom_error_widget.dart';
 import 'best_seller_view_item.dart';
 
-class BestSellerListViewItem extends StatelessWidget {
-  const BestSellerListViewItem({Key? key}) : super(key: key);
+class BestSellerListViewItem extends StatefulWidget {
+  const BestSellerListViewItem({Key? key,}) : super(key: key);
+
+  @override
+  State<BestSellerListViewItem> createState() => _BestSellerListViewItemState();
+}
+
+class _BestSellerListViewItemState extends State<BestSellerListViewItem> {
+
+  @override
+  void initState() {
+    BlocProvider.of<NewestBooksCubit>(context).fetchNewestBooks();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NewestBooksCubit,NewestBooksStates>(
+      buildWhen: (previous,current){
+        return (current is SuccessNewestBooks|| current is LoadingNewestBooks) ;
+      },
       builder: (context,state){
         if(state is SuccessNewestBooks) {
           return  ListView.builder(
@@ -29,8 +44,10 @@ class BestSellerListViewItem extends StatelessWidget {
           );
         }else if(state is FailureNewestBooks ){
           return CustomErrorWidget(errorMessage: state.error,);
-        } else {
+        } else if(state is LoadingNewestBooks) {
           return const CustomCircularIndicator();
+        }else {
+          return  Container();
         }
       },
     );

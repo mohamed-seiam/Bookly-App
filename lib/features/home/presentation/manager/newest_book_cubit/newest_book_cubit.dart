@@ -19,4 +19,15 @@ class NewestBooksCubit extends Cubit<NewestBooksStates>{
       emit(SuccessNewestBooks(bookResponse.books));
     });
   }
+
+  Future<void> fetchSearchBooks ({required String searchKey}) async {
+    emit(LoadingSearchBooks());
+    var result =  await homeRepo.fetchSearchDataBooks(searchKey: searchKey);
+
+    result.fold((failure) {
+      emit(FailureSearchBooks(failure.errorMessage));
+    }, (bookResponse) {
+      emit(SuccessSearchBooks(bookResponse.books));
+    });
+  }
 }
